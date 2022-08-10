@@ -64,7 +64,8 @@ def create_tables():
         
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', os.environ.get('FRONTEND_URL'))
+    response.headers.add('Access-Control-Allow-Origin', os.environ.get('https://'+'FRONTEND_URL'))
+    response.headers.add('Access-Control-Allow-Origin', os.environ.get('http://'+'FRONTEND_URL'))
     return response
 
 api.register_blueprint(TeacherBlueprint)
