@@ -1,0 +1,6 @@
+Flask
+Flask-smorest
+Flask-SQLAlchemy
+Flask-JWT-Extended
+python-dotenv
+uwsgi
