@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash
 
-from flask import Flask
+from flask import Flask, request
 from flask_smorest import Api, abort
 from flask_jwt_extended import JWTManager
 
@@ -64,8 +64,11 @@ def create_tables():
         
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', os.environ.get('https://'+'FRONTEND_URL'))
-    response.headers.add('Access-Control-Allow-Origin', os.environ.get('http://'+'FRONTEND_URL'))
+    origin = request.headers.get('Origin')
+    if origin startswith('http://'):
+        response.headers.add('Access-Control-Allow-Origin', os.environ.get('http://'+'FRONTEND_URL'))
+    elif origin startswith('https://'):
+        response.headers.add('Access-Control-Allow-Origin', os.environ.get('https://'+'FRONTEND_URL'))
     return response
 
 api.register_blueprint(TeacherBlueprint)
