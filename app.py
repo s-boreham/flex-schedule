@@ -28,9 +28,15 @@ app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
 app.config[
     "OPENAPI_SWAGGER_UI_URL"
 ] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///data.db'
+
+uri = os.environ.get('DATABASE_URL')
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config ['JSON_SORT_KEYS'] = False
+
 db.init_app(app)
 
 api = Api(app)
