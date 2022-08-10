@@ -53,8 +53,7 @@ def create_tables():
             "lName": os.environ.get('ADMIN_LNAME'),
             "instrument": os.environ.get('ADMIN_INSTRUMENT'),
             "email": os.environ.get('ADMIN_EMAIL'),
-            "password": generate_password_hash(os.environ.get('ADMIN_PASSWORD')),
-            "unhashed": os.environ.get('ADMIN_PASSWORD')
+            "password": generate_password_hash(os.environ.get('ADMIN_PASSWORD'))
         }
         admin = model.teacher.TeacherModel(**admin_data)
         try:
