@@ -62,6 +62,10 @@ def create_tables():
         except SQLAlchemyError as e:
                 abort(500, message=str(e.__dict__['orig']))
         
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', os.environ.get('FRONTEND_URL'))
+    return response
 
 api.register_blueprint(TeacherBlueprint)
 api.register_blueprint(ScheduleBlueprint)
