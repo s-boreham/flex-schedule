@@ -65,9 +65,9 @@ def create_tables():
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin')
-    if origin startswith('http://'):
+    if origin.startswith('http://'):
         response.headers.add('Access-Control-Allow-Origin', 'http://' + os.environ.get('FRONTEND_URL'))
-    elif origin startswith('https://'):
+    elif origin.startswith('https://'):
         response.headers.add('Access-Control-Allow-Origin', 'https://' + os.environ.get('FRONTEND_URL'))
     return response
 
